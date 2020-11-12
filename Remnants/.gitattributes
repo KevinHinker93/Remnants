@@ -10,3 +10,4 @@ Content/FirstPersonCPP filter=lfs diff=lfs merge=lfs -text
 Content/props_neu filter=lfs diff=lfs merge=lfs -text
 Content/props_remastered filter=lfs diff=lfs merge=lfs -text
 Content/Sound filter=lfs diff=lfs merge=lfs -text
+Content/FirstPersonCPP/Maps filter=lfs diff=lfs merge=lfs -text
