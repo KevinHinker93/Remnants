@@ -23,28 +23,34 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void Apply();
 
-	UPROPERTY(Config, EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Graphics")
+		float m_maxResolutionScaleGain;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Graphics")
+		float m_lowestResolutionScale;
+	UPROPERTY(Config, VisibleAnywhere, BlueprintReadWrite, Category = "Graphics")
+		int resolutionScale;
+	UPROPERTY(Config, VisibleAnywhere, BlueprintReadWrite, Category = "Graphics")
 		int aaQuality;
-	UPROPERTY(Config, EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Config, VisibleAnywhere, BlueprintReadWrite, Category = "Graphics")
 		int postprocessingQuality;
-	UPROPERTY(Config, EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Config, VisibleAnywhere, BlueprintReadWrite, Category = "Graphics")
 		int shadowQuality;
-	UPROPERTY(Config, EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Config, VisibleAnywhere, BlueprintReadWrite, Category = "Graphics")
 		int textureQuality;
-	UPROPERTY(Config, EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Config, VisibleAnywhere, BlueprintReadWrite, Category = "Graphics")
 		int effectQuality;
 
-	UPROPERTY(Config, EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Config, VisibleAnywhere, BlueprintReadWrite, Category = "Mouse")
 		bool invertX;
-	UPROPERTY(Config, EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Config, VisibleAnywhere, BlueprintReadWrite, Category = "Mouse")
 		bool invertY;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Mouse")
 		float m_maxSensitivityGain;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Mouse")
 		float m_lowestSensitivity;
-	UPROPERTY(Config, EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Config, VisibleAnywhere, BlueprintReadWrite, Category = "Mouse")
 		float mouseSensitivityX;
-	UPROPERTY(Config, EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Config, VisibleAnywhere, BlueprintReadWrite, Category = "Mouse")
 		float mouseSensitivityY;
 };

@@ -8,8 +8,9 @@
 // Sets default values
 ASettingsManager::ASettingsManager()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
+	m_maxResolutionScaleGain = 90.0f;
+	m_lowestResolutionScale = 10.0f;
 	m_maxSensitivityGain = 1.75f;
 	m_lowestSensitivity = 0.25f;
 }
@@ -51,6 +52,8 @@ void ASettingsManager::Apply()
 		userSettings->SetShadowQuality(shadowQuality);
 		userSettings->SetTextureQuality(textureQuality);
 		userSettings->SetVisualEffectQuality(effectQuality);
+		int resolutionScaleVal = m_lowestResolutionScale + ((m_maxResolutionScaleGain / 3.0f) *  resolutionScale);
+		userSettings->SetResolutionScaleValueEx(resolutionScaleVal);
 		userSettings->ApplySettings(false);
 
 		if (GetWorld())
