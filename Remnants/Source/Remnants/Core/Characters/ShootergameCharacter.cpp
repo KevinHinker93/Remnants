@@ -95,7 +95,11 @@ AShootergameCharacter::AShootergameCharacter()
 	m_gunOffset = FVector(100.0f, 0.0f, 10.0f);
 
 	// set our turn rates for input
+	m_turnDirection = 1.0f;
+	m_baseTurnMult = 1.0f;
 	m_baseTurnRate = 45.f;
+	m_lookUpDirection = 1.0f;
+	m_baseLookUpMult = 1.0f;
 	m_baseLookUpRate = 45.f;
 	m_moveSpeedMult = 1.0f;
 
@@ -504,9 +508,9 @@ void AShootergameCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
 	// "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
-	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
+	PlayerInputComponent->BindAxis("Turn", this, &AShootergameCharacter::TurnWMouse);
 	PlayerInputComponent->BindAxis("TurnRate", this, &AShootergameCharacter::TurnAtRate);
-	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
+	PlayerInputComponent->BindAxis("LookUp", this, &AShootergameCharacter::LookUpWMouse);
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AShootergameCharacter::LookUpAtRate);
 }
 
@@ -576,11 +580,6 @@ void AShootergameCharacter::MoveForward(float Value)
 		return;
 
 	m_stateComponent->GetCurrentState()->MoveForward(Cast<APawn>(this), Value, m_moveSpeedMult);
-	//if (Value != 0.0f)
-	//{
-	//	// add movement in that direction
-	//	AddMovementInput(GetActorForwardVector(), Value * m_moveSpeedMult);
-	//}
 }
 
 void AShootergameCharacter::Strafe(float Value)
@@ -589,11 +588,14 @@ void AShootergameCharacter::Strafe(float Value)
 		return;
 
 	m_stateComponent->GetCurrentState()->Strafe(Cast<APawn>(this), Value, m_moveSpeedMult);
-	//if (Value != 0.0f)
-	//{
-	//	// add movement in that direction
-	//	AddMovementInput(GetActorRightVector(), Value* m_moveSpeedMult);
-	//}
+}
+
+void AShootergameCharacter::TurnWMouse(float Rate)
+{
+	if (m_isDead)
+		return;
+
+	AddControllerYawInput(Rate * m_baseTurnMult  * m_turnDirection);
 }
 
 void AShootergameCharacter::TurnAtRate(float Rate)
@@ -602,7 +604,16 @@ void AShootergameCharacter::TurnAtRate(float Rate)
 		return;
 
 	// calculate delta for this frame from the rate information
-	AddControllerYawInput(Rate * m_baseTurnRate * GetWorld()->GetDeltaSeconds());
+	AddControllerYawInput(Rate * m_baseTurnRate * GetWorld()->GetDeltaSeconds() * m_turnDirection);
+}
+
+void AShootergameCharacter::LookUpWMouse(float Rate)
+{
+	if (m_isDead)
+		return;
+
+	// calculate delta for this frame from the rate information
+	AddControllerPitchInput(Rate * m_baseLookUpMult * m_lookUpDirection);
 }
 
 void AShootergameCharacter::LookUpAtRate(float Rate)
@@ -611,7 +622,7 @@ void AShootergameCharacter::LookUpAtRate(float Rate)
 		return;
 
 	// calculate delta for this frame from the rate information
-	AddControllerPitchInput(Rate * m_baseLookUpRate * GetWorld()->GetDeltaSeconds());
+	AddControllerPitchInput(Rate * m_baseLookUpRate * GetWorld()->GetDeltaSeconds() * m_lookUpDirection);
 }
 
 void AShootergameCharacter::Interact()

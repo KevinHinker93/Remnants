@@ -57,9 +57,21 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 		FVector m_gunOffset;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, AdvancedDisplay)
+		float m_turnDirection;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+		float m_baseTurnMult;
+
 	// Base turn rate, in deg/sec. Other scaling may affect final turn rate.
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 		float m_baseTurnRate;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+		float m_baseLookUpMult;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, AdvancedDisplay)
+		float m_lookUpDirection;
 
 	// Base look up/down rate, in deg/sec. Other scaling may affect final rate.
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
@@ -161,10 +173,13 @@ protected:
 	// Handles stafing movement, left and right
 	void Strafe(float Val);
 
+	void TurnWMouse(float Rate);
+
 	// Called via input to turn at a given rate.
 	// This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
 	void TurnAtRate(float Rate);
 
+	void LookUpWMouse(float Rate);
 	// Called via input to turn look up/down at a given rate.
 	// This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
 	void LookUpAtRate(float Rate);
