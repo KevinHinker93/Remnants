@@ -93,7 +93,7 @@ AShootergameCharacter::AShootergameCharacter()
 
 	// Default offset from the character location for projectiles to spawn
 	m_gunOffset = FVector(100.0f, 0.0f, 10.0f);
-
+	m_mouseWheelDirection = 1.0f;
 	// set our turn rates for input
 	m_turnDirection = 1.0f;
 	m_baseTurnMult = 1.0f;
@@ -563,7 +563,7 @@ void AShootergameCharacter::ChangeElementPos()
 	if (m_isDead)
 		return;
 
-	m_weaponComponent->ChangeElementSet(1.0);
+	m_weaponComponent->ChangeElementSet(1.0f * m_mouseWheelDirection);
 }
 
 void AShootergameCharacter::ChangeElementNeg()
@@ -571,7 +571,7 @@ void AShootergameCharacter::ChangeElementNeg()
 	if (m_isDead)
 		return;
 
-	m_weaponComponent->ChangeElementSet(-1.0f);
+	m_weaponComponent->ChangeElementSet(-1.0f * m_mouseWheelDirection);
 }
 
 void AShootergameCharacter::MoveForward(float Value)

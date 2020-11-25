@@ -44,6 +44,8 @@ public:
 		bool invertX;
 	UPROPERTY(Config, VisibleAnywhere, BlueprintReadWrite, Category = "Mouse")
 		bool invertY;
+	UPROPERTY(Config, VisibleAnywhere, BlueprintReadWrite, Category = "Mouse")
+		bool mouseWheelInvert;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Mouse")
 		float m_maxSensitivityGain;

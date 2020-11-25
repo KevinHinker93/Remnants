@@ -79,6 +79,11 @@ void ASettingsManager::Apply()
 					player->m_lookUpDirection = -1.0f;
 				else
 					player->m_lookUpDirection = 1.0f;
+
+				if (mouseWheelInvert)
+					player->m_mouseWheelDirection = -1.0f;
+				else
+					player->m_mouseWheelDirection = 1.0f;
 			}
 		}
 

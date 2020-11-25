@@ -58,6 +58,9 @@ public:
 		FVector m_gunOffset;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, AdvancedDisplay)
+		float m_mouseWheelDirection;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, AdvancedDisplay)
 		float m_turnDirection;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
