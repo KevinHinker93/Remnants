@@ -13,12 +13,29 @@ ASettingsManager::ASettingsManager()
 	m_lowestResolutionScale = 10.0f;
 	m_maxSensitivityGain = 1.75f;
 	m_lowestSensitivity = 0.25f;
+
+	resolutionScale = -1;
+	aaQuality = -1;
+	postprocessingQuality = -1;
+	shadowQuality = -1;
+	textureQuality = -1;
+	effectQuality = -1;
+	mouseSensitivityX = -1.0f;
+	mouseSensitivityY = -1.0f;
 }
 
 // Called when the game starts or when spawned
 void ASettingsManager::BeginPlay()
 {
 	Super::BeginPlay();	
+
+	bool sectionExists = GConfig->DoesSectionExist(TEXT("/Game/FirstPersonCPP/Blueprints/SettingsManager_BP.SettingsManager_BP_C"), GGameIni);
+	if (!sectionExists)
+	{
+		InitConfigValues();
+		SaveConfig();
+	}
+
 	Load();
 	Apply();
 }
@@ -27,7 +44,6 @@ void ASettingsManager::BeginPlay()
 void ASettingsManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void ASettingsManager::Save()
@@ -89,4 +105,19 @@ void ASettingsManager::Apply()
 
 		UE_LOG(LogTemp, Log, TEXT("Applied settings"));
 	}
+}
+
+void ASettingsManager::InitConfigValues()
+{
+	resolutionScale = m_defaultResolutionScale;
+	aaQuality = m_default_aaQuality;
+	postprocessingQuality = m_defaultPostprocessingQuality;
+	shadowQuality = m_defaultShadowQuality;
+	textureQuality = m_defaultTextureQuality;
+	effectQuality = m_defaultEffectQuality;
+	invertX = m_defaultInvertX;
+	invertY = m_defaultInvertY;
+	mouseWheelInvert = m_defaultMouseWheelInvert;
+	mouseSensitivityX = m_defaultMouseSensitivityX;
+	mouseSensitivityY = m_defaultMouseSensitivityY; 
 }

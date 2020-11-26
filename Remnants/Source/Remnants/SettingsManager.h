@@ -23,6 +23,34 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void Apply();
 
+	// Default settings
+	UPROPERTY(EditDefaultsOnly, Category = "Default Settings")
+		int m_defaultResolutionScale;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Default Settings")
+		int m_default_aaQuality;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Default Settings")
+		int m_defaultPostprocessingQuality;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Default Settings")
+		int m_defaultShadowQuality;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Default Settings")
+		int m_defaultTextureQuality;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Default Settings")
+		int m_defaultEffectQuality;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Default Settings")
+		bool m_defaultInvertX;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Default Settings")
+		bool m_defaultInvertY;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Default Settings")
+		bool m_defaultMouseWheelInvert;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Default Settings")
+		float m_defaultMouseSensitivityX;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Default Settings")
+		float m_defaultMouseSensitivityY;
+
+
+	// Loadable config settings
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Graphics")
 		float m_maxResolutionScaleGain;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Graphics")
@@ -55,4 +83,7 @@ public:
 		float mouseSensitivityX;
 	UPROPERTY(Config, VisibleAnywhere, BlueprintReadWrite, Category = "Mouse")
 		float mouseSensitivityY;
+
+private:
+	void InitConfigValues();
 };
