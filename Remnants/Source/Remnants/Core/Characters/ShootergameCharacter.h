@@ -126,6 +126,9 @@ public:
 
 	void Reset();
 
+	UFUNCTION(Exec, Category = CommandLine)
+		void GiveItem(int id);
+
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 		class UHealthComponent* m_healthComponent;

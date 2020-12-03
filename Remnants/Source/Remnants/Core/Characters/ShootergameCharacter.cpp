@@ -566,6 +566,12 @@ void AShootergameCharacter::ChangeElementPos()
 	m_weaponComponent->ChangeElementSet(1.0f * m_mouseWheelDirection);
 }
 
+void AShootergameCharacter::GiveItem(int id)
+{
+	m_inventoryComponent->GetItemCollection()->AddItem(id);
+	UE_LOG(LogTemp, Log, TEXT("Added Item %d"), id);
+}
+
 void AShootergameCharacter::ChangeElementNeg()
 {
 	if (m_isDead)
